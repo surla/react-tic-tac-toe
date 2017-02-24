@@ -89,6 +89,12 @@ class Game extends React.Component {
       xIsNext: true,
       stepNumber: 0,
     };
+    this.baseState = {
+      state: this.state,
+      numGames: 1,
+      pointX: 0,
+      pointO: 0,
+    };
   }
 
   handleClick(i) {
@@ -115,14 +121,27 @@ class Game extends React.Component {
     });
   }
 
+  endGame = () => {
+    this.setState(this.baseState.state);
+    this.baseState.numGames += 1;
+  }
+
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
 
     let status;
+
+
+
     if (winner) {
       status = 'Winner: ' + winner;
+      if (winner === 'X') {
+        this.baseState.pointX ++;
+      } else {
+        this.baseState.pointO ++;
+      };
     } else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
@@ -150,6 +169,16 @@ class Game extends React.Component {
           <div>{status}</div>
         <ol>{moves}</ol>
         </div>
+        <button
+          onClick={this.endGame}>
+        Restart Game
+        </button>
+
+        <p># of Games: {this.baseState.numGames} <br></br>
+      X wins = {this.baseState.pointX} <br></br>
+    O wins = {this.baseState.pointO}
+        </p>
+
       </div>
     );
   }
