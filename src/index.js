@@ -175,8 +175,8 @@ class Game extends React.Component {
         </button>
 
         <p># of Games: {this.baseState.numGames} <br></br>
-      X wins = {this.baseState.pointX} <br></br>
-    O wins = {this.baseState.pointO}
+          X wins = {this.baseState.pointX} <br></br>
+          O wins = {this.baseState.pointO}
         </p>
 
       </div>
